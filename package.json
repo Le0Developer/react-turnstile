@@ -1,0 +1,31 @@
+{
+  "name": "react-turnstile",
+  "version": "1.0.0",
+  "description": "React library for Cloudflare's Turnstile CAPTCHA alternative",
+  "main": "dist/index.cjs",
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "build": "tsc",
+    "style-fix": "npx prettier -w ."
+  },
+  "exports": {
+    "import": "./dist/index.js",
+    "types": "./dist/index.d.ts"
+  },
+  "types": "./dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Le0developer/react-turnstile"
+  },
+  "peerDependencies": {
+    "react": ">= 17.0.0",
+    "react-dom": ">= 17.0.0"
+  },
+  "author": "Leo Developer",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/react": "^18.0.21",
+    "prettier": "^2.7.1",
+    "typescript": "^4.8.4"
+  }
+}
