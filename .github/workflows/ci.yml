@@ -19,6 +19,9 @@ jobs:
         with:
           node-version: "18"
 
+      - name: Install dependencies
+        run: npm i
+
       - name: Linting
         run: npx -y prettier -c .
 
