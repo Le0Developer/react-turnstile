@@ -57,7 +57,6 @@ export default function Turnstile({
 
   useEffect(() => {
     if (!ref.current) return;
-    ref.current.innerHTML = ""; // remove old widget
     (async () => {
       if (!ref.current) return;
       // load turnstile
@@ -72,6 +71,7 @@ export default function Turnstile({
       onLoad?.();
       // turnstile is loaded, render the widget
 
+      ref.current.innerHTML = ""; // remove old widget
       const turnstileOptions: RawTurnstileOptions = {
         sitekey,
         action,
