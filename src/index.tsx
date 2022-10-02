@@ -119,6 +119,7 @@ interface TurnstileProps {
 }
 
 // Generic typescript definitions of the turnstile api
+// Last updated: 2022-10-02 21:30:00 UTC
 
 declare global {
   interface Window {
@@ -129,6 +130,7 @@ declare global {
       ) => string;
       reset: (widgetId: string) => void;
       getResponse: (widgetId: string) => string | undefined;
+      remove: (widgetId: string) => void;
     };
   }
 }
@@ -142,4 +144,14 @@ interface RawTurnstileOptions {
   "expired-callback"?: () => void;
   theme?: "light" | "dark" | "auto";
   tabindex?: number;
+  // undocumented fields
+  "size"?: "normal" | "invisible" | "compact"; // UNUSED; compact warns that its unavailable
+  "response-field"?: boolean; // defaults to true
+  "response-field-name"?: string; // defaults to cf-turnstile-response
 }
+
+// query arguments when adding the script
+
+// compat=recaptcha      registers the turnstile api as window.grecaptcha and enables recaptcha compat
+// onload=x              function is executed when turnstile is loaded
+// render=explicit       if this value is anything but 'explicit', the DOM is searched for implicit widgets
