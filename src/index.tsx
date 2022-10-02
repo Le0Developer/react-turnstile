@@ -1,4 +1,4 @@
-import React, { useEffect, createRef } from "react";
+import React, { useEffect, createRef, useState } from "react";
 
 const global = globalThis ?? window;
 let turnstileState =
@@ -54,6 +54,7 @@ export default function Turnstile({
   onExpire,
 }: TurnstileProps) {
   const ref = createRef<HTMLDivElement>();
+  const inplaceState = useState<TurnstileCallbacks>({ onVerify })[0];
 
   useEffect(() => {
     if (!ref.current) return;
@@ -66,11 +67,11 @@ export default function Turnstile({
         try {
           await ensureTurnstile();
         } catch (e) {
-          onError?.(e);
+          inplaceState.onError?.(e);
           return;
         }
       }
-      onLoad?.();
+      inplaceState.onLoad?.();
       // turnstile is loaded, render the widget
 
       if(cancelled) return;
@@ -80,9 +81,9 @@ export default function Turnstile({
         cData,
         theme,
         tabindex: tabIndex,
-        callback: onVerify,
-        "error-callback": onError,
-        "expired-callback": onExpire,
+        callback: (token: string) => inplaceState.onVerify(token),
+        "error-callback": () => inplaceState.onError?.(),
+        "expired-callback": () => inplaceState.onExpire?.(),
         "response-field": false,
       };
 
@@ -98,18 +99,23 @@ export default function Turnstile({
     cData,
     theme,
     tabIndex,
-    // reloading on the following causes an infinite loop
-    // ref,
-    // onVerify,
-    // onLoad,
-    // onError,
-    // onExpire,
   ]);
+  useEffect(() => {
+    inplaceState.onVerify = onVerify;
+    inplaceState.onLoad = onLoad;
+    inplaceState.onError = onError;
+    inplaceState.onExpire = onExpire;
+  }, [
+    onVerify,
+    onLoad,
+    onError,
+    onExpire,
+  ])
 
   return <div ref={ref} id={id} className={className} />;
 }
 
-interface TurnstileProps {
+interface TurnstileProps extends TurnstileCallbacks {
   sitekey: string;
   action?: string;
   cData?: string;
@@ -118,7 +124,9 @@ interface TurnstileProps {
 
   id?: string;
   className?: string;
+}
 
+interface TurnstileCallbacks {
   onVerify: (token: string) => void;
   onLoad?: () => void;
   onError?: (error?: Error | any) => void;
