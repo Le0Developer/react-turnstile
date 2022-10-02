@@ -53,7 +53,7 @@ export default function Turnstile({
   onError,
   onExpire,
 }: TurnstileProps) {
-  const ref: React.RefObject<HTMLDivElement> = createRef();
+  const ref = createRef<HTMLDivElement>();
 
   useEffect(() => {
     if (!ref.current) return;
