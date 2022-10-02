@@ -57,6 +57,8 @@ export default function Turnstile({
 
   useEffect(() => {
     if (!ref.current) return;
+    let cancelled = false;
+    let widgetId = "";
     (async () => {
       if (!ref.current) return;
       // load turnstile
@@ -71,7 +73,7 @@ export default function Turnstile({
       onLoad?.();
       // turnstile is loaded, render the widget
 
-      ref.current.innerHTML = ""; // remove old widget
+      if(cancelled) return;
       const turnstileOptions: RawTurnstileOptions = {
         sitekey,
         action,
@@ -84,8 +86,12 @@ export default function Turnstile({
         "response-field": false,
       };
 
-      window.turnstile.render(ref.current, turnstileOptions);
+      widgetId = window.turnstile.render(ref.current, turnstileOptions);
     })();
+    return () => {
+      cancelled = true;
+      if(widgetId) window.turnstile.remove(widgetId);
+    }
   }, [
     sitekey,
     action,
