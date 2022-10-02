@@ -43,6 +43,7 @@ let ensureTurnstile: () => Promise<any>;
 export default function Turnstile({
   id,
   className,
+  style,
   sitekey,
   action,
   cData,
@@ -101,7 +102,7 @@ export default function Turnstile({
     inplaceState.onExpire = onExpire;
   }, [onVerify, onLoad, onError, onExpire]);
 
-  return <div ref={ref} id={id} className={className} />;
+  return <div ref={ref} id={id} className={className} style={style} />;
 }
 
 interface TurnstileProps extends TurnstileCallbacks {
@@ -113,6 +114,7 @@ interface TurnstileProps extends TurnstileCallbacks {
 
   id?: string;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 interface TurnstileCallbacks {
