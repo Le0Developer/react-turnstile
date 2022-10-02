@@ -27,7 +27,7 @@ let ensureTurnstile: () => Promise<any>;
   ensureTurnstile = () => {
     if (turnstileState === "unloaded") {
       turnstileState = "loading";
-      const url = `${TURNSTILE_SRC}?onload=${TURNSTILE_LOAD_FUNCTION}`;
+      const url = `${TURNSTILE_SRC}?onload=${TURNSTILE_LOAD_FUNCTION}&render=explicit`;
       const script = document.createElement("script");
       script.src = url;
       script.async = true;
