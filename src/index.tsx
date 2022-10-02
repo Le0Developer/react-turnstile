@@ -74,7 +74,7 @@ export default function Turnstile({
       inplaceState.onLoad?.();
       // turnstile is loaded, render the widget
 
-      if(cancelled) return;
+      if (cancelled) return;
       const turnstileOptions: RawTurnstileOptions = {
         sitekey,
         action,
@@ -91,26 +91,15 @@ export default function Turnstile({
     })();
     return () => {
       cancelled = true;
-      if(widgetId) window.turnstile.remove(widgetId);
-    }
-  }, [
-    sitekey,
-    action,
-    cData,
-    theme,
-    tabIndex,
-  ]);
+      if (widgetId) window.turnstile.remove(widgetId);
+    };
+  }, [sitekey, action, cData, theme, tabIndex]);
   useEffect(() => {
     inplaceState.onVerify = onVerify;
     inplaceState.onLoad = onLoad;
     inplaceState.onError = onError;
     inplaceState.onExpire = onExpire;
-  }, [
-    onVerify,
-    onLoad,
-    onError,
-    onExpire,
-  ])
+  }, [onVerify, onLoad, onError, onExpire]);
 
   return <div ref={ref} id={id} className={className} />;
 }
@@ -160,7 +149,7 @@ interface RawTurnstileOptions {
   theme?: "light" | "dark" | "auto";
   tabindex?: number;
   // undocumented fields
-  "size"?: "normal" | "invisible" | "compact"; // UNUSED; compact warns that its unavailable
+  size?: "normal" | "invisible" | "compact"; // UNUSED; compact warns that its unavailable
   "response-field"?: boolean; // defaults to true
   "response-field-name"?: string; // defaults to cf-turnstile-response
 }
