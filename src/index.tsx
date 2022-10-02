@@ -49,6 +49,8 @@ export default function Turnstile({
   cData,
   theme,
   tabIndex,
+  responseField,
+  responseFieldName,
   onVerify,
   onLoad,
   onError,
@@ -85,7 +87,8 @@ export default function Turnstile({
         callback: (token: string) => inplaceState.onVerify(token),
         "error-callback": () => inplaceState.onError?.(),
         "expired-callback": () => inplaceState.onExpire?.(),
-        "response-field": false,
+        "response-field": responseField,
+        "response-field-name": responseFieldName,
       };
 
       widgetId = window.turnstile.render(ref.current, turnstileOptions);
@@ -94,7 +97,15 @@ export default function Turnstile({
       cancelled = true;
       if (widgetId) window.turnstile.remove(widgetId);
     };
-  }, [sitekey, action, cData, theme, tabIndex]);
+  }, [
+    sitekey,
+    action,
+    cData,
+    theme,
+    tabIndex,
+    responseField,
+    responseFieldName,
+  ]);
   useEffect(() => {
     inplaceState.onVerify = onVerify;
     inplaceState.onLoad = onLoad;
@@ -111,6 +122,8 @@ interface TurnstileProps extends TurnstileCallbacks {
   cData?: string;
   theme?: "light" | "dark" | "auto";
   tabIndex?: number;
+  responseField?: boolean;
+  responseFieldName?: string;
 
   id?: string;
   className?: string;
