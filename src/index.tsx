@@ -64,7 +64,6 @@ export default function Turnstile({
     let cancelled = false;
     let widgetId = "";
     (async () => {
-      if (!ref.current) return;
       // load turnstile
       if (turnstileState !== "ready") {
         try {
@@ -77,7 +76,7 @@ export default function Turnstile({
       inplaceState.onLoad?.();
       // turnstile is loaded, render the widget
 
-      if (cancelled) return;
+      if (cancelled || !ref.current) return;
       const turnstileOptions: RawTurnstileOptions = {
         sitekey,
         action,
