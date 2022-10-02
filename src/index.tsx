@@ -81,6 +81,7 @@ export default function Turnstile({
         callback: onVerify,
         "error-callback": onError,
         "expired-callback": onExpire,
+        "response-field": false,
       };
 
       window.turnstile.render(ref.current, turnstileOptions);
