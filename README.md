@@ -51,7 +51,6 @@ And the following callbacks:
 | onError  | error     | called when an error occurs                |
 | onExpire | -         | called when the challenge expires \*\*     |
 
-
 \* responseField and responseFieldName are experimental and not yet documented.
 
 \*\* `onExpire` is called when the Turnstile challenge expires without creating a token.
