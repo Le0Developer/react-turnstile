@@ -56,7 +56,7 @@ export default function Turnstile({
   onError,
   onExpire,
 }: TurnstileProps) {
-  const ref = useRef<HTMLDivElement>();
+  const ref = useRef<HTMLDivElement | null>(null);
   const inplaceState = useState<TurnstileCallbacks>({ onVerify })[0];
 
   useEffect(() => {
