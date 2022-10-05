@@ -77,7 +77,7 @@ export default function Turnstile({
       // turnstile is loaded, render the widget
 
       if (cancelled || !ref.current) return;
-      const turnstileOptions: RawTurnstileOptions = {
+      const turnstileOptions: TurnstileOptions = {
         sitekey,
         action,
         cData,
@@ -143,17 +143,17 @@ declare global {
   interface Window {
     turnstile: {
       render: (
-        element: string | HTMLElement,
-        options: RawTurnstileOptions
+        idOrContainer: string | HTMLElement,
+        options: TurnstileOptions
       ) => string;
-      reset: (widgetId: string) => void;
-      getResponse: (widgetId: string) => string | undefined;
-      remove: (widgetId: string) => void;
+      reset: (widgetIdOrContainer: string | HTMLElement) => void;
+      getResponse: (widgetIdOrContainer: string | HTMLElement) => string | undefined;
+      remove: (widgetIdOrContainer: string | HTMLElement) => void;
     };
   }
 }
 
-interface RawTurnstileOptions {
+interface TurnstileOptions {
   sitekey: string;
   action?: string;
   cData?: string;
