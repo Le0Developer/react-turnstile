@@ -1,4 +1,4 @@
-import React, { useEffect, createRef, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 const global = globalThis ?? window;
 let turnstileState =
@@ -56,7 +56,7 @@ export default function Turnstile({
   onError,
   onExpire,
 }: TurnstileProps) {
-  const ref = createRef<HTMLDivElement>();
+  const ref = useRef<HTMLDivElement>();
   const inplaceState = useState<TurnstileCallbacks>({ onVerify })[0];
 
   useEffect(() => {
