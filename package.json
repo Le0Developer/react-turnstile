@@ -2,7 +2,7 @@
   "name": "react-turnstile",
   "version": "1.0.1",
   "description": "React library for Cloudflare's Turnstile CAPTCHA alternative",
-  "main": "dist/index.cjs",
+  "main": "dist/index.js",
   "scripts": {
     "prepublishOnly": "npm run build",
     "build": "tsc",
