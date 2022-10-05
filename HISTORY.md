@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - A race condition when loading Turnstile on page load in dev mode has been fixed
 - Callback props will now update as expected
+- Entrypoint pointing to the wrong file (#3)
 
 ## [1.0.1] - 2022-10-01
 
