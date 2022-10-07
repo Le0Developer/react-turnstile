@@ -147,7 +147,9 @@ declare global {
         options: TurnstileOptions
       ) => string;
       reset: (widgetIdOrContainer: string | HTMLElement) => void;
-      getResponse: (widgetIdOrContainer: string | HTMLElement) => string | undefined;
+      getResponse: (
+        widgetIdOrContainer: string | HTMLElement
+      ) => string | undefined;
       remove: (widgetIdOrContainer: string | HTMLElement) => void;
     };
   }
