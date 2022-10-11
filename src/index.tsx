@@ -73,9 +73,6 @@ export default function Turnstile({
           return;
         }
       }
-      inplaceState.onLoad?.();
-      // turnstile is loaded, render the widget
-
       if (cancelled || !ref.current) return;
       const turnstileOptions: TurnstileOptions = {
         sitekey,
@@ -91,6 +88,7 @@ export default function Turnstile({
       };
 
       widgetId = window.turnstile.render(ref.current, turnstileOptions);
+      inplaceState.onLoad?.(widgetId);
     })();
     return () => {
       cancelled = true;
@@ -131,7 +129,7 @@ interface TurnstileProps extends TurnstileCallbacks {
 
 interface TurnstileCallbacks {
   onVerify: (token: string) => void;
-  onLoad?: () => void;
+  onLoad?: (widgetId: string) => void;
   onError?: (error?: Error | any) => void;
   onExpire?: () => void;
 }
