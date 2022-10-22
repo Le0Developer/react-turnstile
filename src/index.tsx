@@ -48,6 +48,7 @@ export default function Turnstile({
   action,
   cData,
   theme,
+  size,
   tabIndex,
   responseField,
   responseFieldName,
@@ -79,6 +80,7 @@ export default function Turnstile({
         action,
         cData,
         theme,
+        size,
         tabindex: tabIndex,
         callback: (token: string) => inplaceState.onVerify(token),
         "error-callback": () => inplaceState.onError?.(),
@@ -99,6 +101,7 @@ export default function Turnstile({
     action,
     cData,
     theme,
+    size,
     tabIndex,
     responseField,
     responseFieldName,
@@ -118,6 +121,7 @@ interface TurnstileProps extends TurnstileCallbacks {
   action?: string;
   cData?: string;
   theme?: "light" | "dark" | "auto";
+  size?: "normal" | "invisible" | "compact";
   tabIndex?: number;
   responseField?: boolean;
   responseFieldName?: string;
@@ -163,7 +167,7 @@ interface TurnstileOptions {
   theme?: "light" | "dark" | "auto";
   tabindex?: number;
   // undocumented fields
-  size?: "normal" | "invisible" | "compact"; // UNUSED; compact warns that its unavailable
+  size?: "normal" | "invisible" | "compact";
   "response-field"?: boolean; // defaults to true
   "response-field-name"?: string; // defaults to cf-turnstile-response
 }
