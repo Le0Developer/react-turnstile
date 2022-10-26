@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Added support for the new `onTimeout` callback
+
 ## [1.0.5] - 2022-10-22
 
 ### Added

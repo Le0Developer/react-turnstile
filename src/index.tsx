@@ -52,10 +52,12 @@ export default function Turnstile({
   tabIndex,
   responseField,
   responseFieldName,
+  autoResetOnExpire,
   onVerify,
   onLoad,
   onError,
   onExpire,
+  onTimeout,
 }: TurnstileProps) {
   const ref = useRef<HTMLDivElement | null>(null);
   const inplaceState = useState<TurnstileCallbacks>({ onVerify })[0];
@@ -84,7 +86,11 @@ export default function Turnstile({
         tabindex: tabIndex,
         callback: (token: string) => inplaceState.onVerify(token),
         "error-callback": () => inplaceState.onError?.(),
-        "expired-callback": () => inplaceState.onExpire?.(),
+        "expired-callback": () => {
+          inplaceState.onExpire?.()
+          if(autoResetOnExpire) window.turnstile.reset(widgetId);
+        },
+        "timeout-callback": () => inplaceState.onTimeout?.(),
         "response-field": responseField,
         "response-field-name": responseFieldName,
       };
@@ -105,13 +111,14 @@ export default function Turnstile({
     tabIndex,
     responseField,
     responseFieldName,
+    autoResetOnExpire,
   ]);
   useEffect(() => {
     inplaceState.onVerify = onVerify;
     inplaceState.onLoad = onLoad;
     inplaceState.onError = onError;
     inplaceState.onExpire = onExpire;
-  }, [onVerify, onLoad, onError, onExpire]);
+  }, [onVerify, onLoad, onError, onExpire, onTimeout]);
 
   return <div ref={ref} id={id} className={className} style={style} />;
 }
@@ -125,6 +132,7 @@ interface TurnstileProps extends TurnstileCallbacks {
   tabIndex?: number;
   responseField?: boolean;
   responseFieldName?: string;
+  autoResetOnExpire?: boolean;
 
   id?: string;
   className?: string;
@@ -136,10 +144,11 @@ interface TurnstileCallbacks {
   onLoad?: (widgetId: string) => void;
   onError?: (error?: Error | any) => void;
   onExpire?: () => void;
+  onTimeout?: () => void;
 }
 
 // Generic typescript definitions of the turnstile api
-// Last updated: 2022-10-02 21:30:00 UTC
+// Last updated: 2022-10-22 21:30:00 UTC
 
 declare global {
   interface Window {
@@ -164,16 +173,10 @@ interface TurnstileOptions {
   callback?: (token: string) => void;
   "error-callback"?: () => void;
   "expired-callback"?: () => void;
-  theme?: "light" | "dark" | "auto";
+  "timeout-callback"?: () => void;
+  theme?: "light" | "dark" | "auto"; // defaults to auto
   tabindex?: number;
-  // undocumented fields
-  size?: "normal" | "invisible" | "compact";
   "response-field"?: boolean; // defaults to true
   "response-field-name"?: string; // defaults to cf-turnstile-response
+  size?: "normal" | "invisible" | "compact";
 }
-
-// query arguments when adding the script
-
-// compat=recaptcha      registers the turnstile api as window.grecaptcha and enables recaptcha compat
-// onload=x              function is executed when turnstile is loaded
-// render=explicit       if this value is anything but 'explicit', the DOM is searched for implicit widgets
