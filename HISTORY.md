@@ -7,9 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Changed
+### Added
 
-- Added support for the new `onTimeout` callback
+- Support for the new `onTimeout` callback
+- `autoResetOnExpire` for automatically resetting the Turnstile widget once the token expires
+- `retry` & `retryInterval`
 
 ## [1.0.5] - 2022-10-22
 

@@ -41,6 +41,8 @@ Turnstile takes the following arguments:
 | tabIndex          | number  | -                                                        |
 | responseField     | boolean | controls generation of `<input />` element               |
 | responseFieldName | string  | changes the name of `<input />` element                  |
+| retry             | string  | one of "auto", "never"                                   |
+| retryInterval     | number  | interval of retries in ms                                |
 | autoResetOnExpire | boolean | automatically reset the widget when the token expires    |
 | id                | string  | id of the div                                            |
 | className         | string  | passed to the div                                        |

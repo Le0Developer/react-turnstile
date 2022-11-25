@@ -53,6 +53,8 @@ export default function Turnstile({
   tabIndex,
   responseField,
   responseFieldName,
+  retry,
+  retryInterval,
   autoResetOnExpire,
   onVerify,
   onLoad,
@@ -94,6 +96,8 @@ export default function Turnstile({
         "timeout-callback": () => inplaceState.onTimeout?.(),
         "response-field": responseField,
         "response-field-name": responseFieldName,
+        retry,
+        "retry-interval": retryInterval,
       };
 
       widgetId = window.turnstile.render(ref.current, turnstileOptions);
@@ -112,6 +116,8 @@ export default function Turnstile({
     tabIndex,
     responseField,
     responseFieldName,
+    retry,
+    retryInterval,
     autoResetOnExpire,
   ]);
   useEffect(() => {
@@ -133,6 +139,8 @@ interface TurnstileProps extends TurnstileCallbacks {
   tabIndex?: number;
   responseField?: boolean;
   responseFieldName?: string;
+  retry?: "auto" | "never";
+  retryInterval?: number;
   autoResetOnExpire?: boolean;
 
   id?: string;
