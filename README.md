@@ -45,6 +45,7 @@ Turnstile takes the following arguments:
 | retryInterval     | number  | interval of retries in ms                                |
 | autoResetOnExpire | boolean | automatically reset the widget when the token expires    |
 | id                | string  | id of the div                                            |
+| ref               | Ref     | custom react ref for the div                             |
 | className         | string  | passed to the div                                        |
 | style             | object  | passed to the div                                        |
 

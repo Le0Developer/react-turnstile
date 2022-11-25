@@ -43,6 +43,7 @@ let ensureTurnstile: () => Promise<any>;
 
 export default function Turnstile({
   id,
+  ref: userRef,
   className,
   style,
   sitekey,
@@ -62,8 +63,10 @@ export default function Turnstile({
   onExpire,
   onTimeout,
 }: TurnstileProps) {
-  const ref = useRef<HTMLDivElement | null>(null);
+  const ownRef = useRef<HTMLDivElement | null>(null);
   const inplaceState = useState<TurnstileCallbacks>({ onVerify })[0];
+
+  const ref = userRef ?? ownRef;
 
   useEffect(() => {
     if (!ref.current) return;
@@ -144,6 +147,7 @@ interface TurnstileProps extends TurnstileCallbacks {
   autoResetOnExpire?: boolean;
 
   id?: string;
+  ref?: React.MutableRefObject<HTMLDivElement>;
   className?: string;
   style?: React.CSSProperties;
 }
