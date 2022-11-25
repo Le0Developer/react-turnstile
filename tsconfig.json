@@ -23,7 +23,8 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "types": ["turnstile-types"]
   },
   "exclude": ["node_modules", "dist"]
 }

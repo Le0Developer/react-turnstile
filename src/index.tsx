@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { TurnstileOptions } from "turnstile-types";
 
 const global = globalThis ?? window;
 let turnstileState =
@@ -145,38 +146,4 @@ interface TurnstileCallbacks {
   onError?: (error?: Error | any) => void;
   onExpire?: () => void;
   onTimeout?: () => void;
-}
-
-// Generic typescript definitions of the turnstile api
-// Last updated: 2022-10-22 21:30:00 UTC
-
-declare global {
-  interface Window {
-    turnstile: {
-      render: (
-        idOrContainer: string | HTMLElement,
-        options: TurnstileOptions
-      ) => string;
-      reset: (widgetIdOrContainer: string | HTMLElement) => void;
-      getResponse: (
-        widgetIdOrContainer: string | HTMLElement
-      ) => string | undefined;
-      remove: (widgetIdOrContainer: string | HTMLElement) => void;
-    };
-  }
-}
-
-interface TurnstileOptions {
-  sitekey: string;
-  action?: string;
-  cData?: string;
-  callback?: (token: string) => void;
-  "error-callback"?: () => void;
-  "expired-callback"?: () => void;
-  "timeout-callback"?: () => void;
-  theme?: "light" | "dark" | "auto"; // defaults to auto
-  tabindex?: number;
-  "response-field"?: boolean; // defaults to true
-  "response-field-name"?: string; // defaults to cf-turnstile-response
-  size?: "normal" | "invisible" | "compact";
 }
