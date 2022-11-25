@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Temporary load callback function is now removed after load
+
 ## [1.0.6] - 2022-11-25
 
 ### Added
