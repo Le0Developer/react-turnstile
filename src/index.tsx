@@ -93,8 +93,8 @@ export default function Turnstile({
         callback: (token: string) => inplaceState.onVerify(token),
         "error-callback": () => inplaceState.onError?.(),
         "expired-callback": () => {
-          inplaceState.onExpire?.()
-          if(autoResetOnExpire) window.turnstile.reset(widgetId);
+          inplaceState.onExpire?.();
+          if (autoResetOnExpire) window.turnstile.reset(widgetId);
         },
         "timeout-callback": () => inplaceState.onTimeout?.(),
         "response-field": responseField,

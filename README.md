@@ -32,22 +32,22 @@ set the `autoResetOnExpire` prop to true or reset the widget yourself using the 
 
 Turnstile takes the following arguments:
 
-| name              | type    | description                                              |
-| ----------------- | ------- | -------------------------------------------------------- |
-| sitekey           | string  | sitekey of your website (REQUIRED)                       |
-| action            | string  | -                                                        |
-| cData             | string  | -                                                        |
-| theme             | string  | one of "light", "dark", "auto"                           |
-| tabIndex          | number  | -                                                        |
-| responseField     | boolean | controls generation of `<input />` element               |
-| responseFieldName | string  | changes the name of `<input />` element                  |
-| retry             | string  | one of "auto", "never"                                   |
-| retryInterval     | number  | interval of retries in ms                                |
-| autoResetOnExpire | boolean | automatically reset the widget when the token expires    |
-| id                | string  | id of the div                                            |
-| ref               | Ref     | custom react ref for the div                             |
-| className         | string  | passed to the div                                        |
-| style             | object  | passed to the div                                        |
+| name              | type    | description                                           |
+| ----------------- | ------- | ----------------------------------------------------- |
+| sitekey           | string  | sitekey of your website (REQUIRED)                    |
+| action            | string  | -                                                     |
+| cData             | string  | -                                                     |
+| theme             | string  | one of "light", "dark", "auto"                        |
+| tabIndex          | number  | -                                                     |
+| responseField     | boolean | controls generation of `<input />` element            |
+| responseFieldName | string  | changes the name of `<input />` element               |
+| retry             | string  | one of "auto", "never"                                |
+| retryInterval     | number  | interval of retries in ms                             |
+| autoResetOnExpire | boolean | automatically reset the widget when the token expires |
+| id                | string  | id of the div                                         |
+| ref               | Ref     | custom react ref for the div                          |
+| className         | string  | passed to the div                                     |
+| style             | object  | passed to the div                                     |
 
 And the following callbacks:
 
