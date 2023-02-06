@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { TurnstileOptions } from "turnstile-types";
+import { TurnstileOptions, SupportedLanguages } from "turnstile-types";
 
 const global = (globalThis ?? window) as any;
 let turnstileState =
@@ -51,10 +51,11 @@ export default function Turnstile({
   action,
   cData,
   theme,
-  size,
+  language,
   tabIndex,
   responseField,
   responseFieldName,
+  size,
   retry,
   retryInterval,
   refreshExpired,
@@ -90,10 +91,11 @@ export default function Turnstile({
         action,
         cData,
         theme,
-        size,
+        language,
         tabindex: tabIndex,
         "response-field": responseField,
         "response-field-name": responseFieldName,
+        size,
         retry,
         "retry-interval": retryInterval,
         "refresh-expired": refreshExpired,
@@ -115,10 +117,11 @@ export default function Turnstile({
     action,
     cData,
     theme,
-    size,
+    language,
     tabIndex,
     responseField,
     responseFieldName,
+    size,
     retry,
     retryInterval,
     refreshExpired,
@@ -139,10 +142,11 @@ interface TurnstileProps extends TurnstileCallbacks {
   action?: string;
   cData?: string;
   theme?: "light" | "dark" | "auto";
-  size?: "normal" | "invisible" | "compact";
+  language?: SupportedLanguages | "auto";
   tabIndex?: number;
   responseField?: boolean;
   responseFieldName?: string;
+  size?: "normal" | "invisible" | "compact";
   retry?: "auto" | "never";
   retryInterval?: number;
   refreshExpired?: "auto" | "manual" | "never";
