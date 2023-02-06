@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - `onTimeout` callback not properly registering
+- `ref` not passing properly - pass `userRef` instead
 
 ## [1.0.6] - 2022-11-25
 

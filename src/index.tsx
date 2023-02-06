@@ -45,7 +45,6 @@ let ensureTurnstile: () => Promise<any>;
 
 export default function Turnstile({
   id,
-  ref: userRef,
   className,
   style,
   sitekey,
@@ -59,6 +58,7 @@ export default function Turnstile({
   retry,
   retryInterval,
   autoResetOnExpire,
+  userRef,
   onVerify,
   onLoad,
   onError,
@@ -150,7 +150,7 @@ interface TurnstileProps extends TurnstileCallbacks {
   autoResetOnExpire?: boolean;
 
   id?: string;
-  ref?: React.MutableRefObject<HTMLDivElement>;
+  userRef?: React.MutableRefObject<HTMLDivElement>;
   className?: string;
   style?: React.CSSProperties;
 }
