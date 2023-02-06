@@ -130,6 +130,7 @@ export default function Turnstile({
     inplaceState.onLoad = onLoad;
     inplaceState.onError = onError;
     inplaceState.onExpire = onExpire;
+    inplaceState.onTimeout = onTimeout;
   }, [onVerify, onLoad, onError, onExpire, onTimeout]);
 
   return <div ref={ref} id={id} className={className} style={style} />;

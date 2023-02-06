@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Temporary load callback function is now removed after load
 
+### Fixed
+
+- `onTimeout` callback not properly registering
+
 ## [1.0.6] - 2022-11-25
 
 ### Added
