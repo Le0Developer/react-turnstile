@@ -57,7 +57,7 @@ export default function Turnstile({
   responseFieldName,
   retry,
   retryInterval,
-  autoResetOnExpire,
+  refreshExpired,
   userRef,
   onVerify,
   onLoad,
@@ -92,17 +92,15 @@ export default function Turnstile({
         theme,
         size,
         tabindex: tabIndex,
-        callback: (token: string) => inplaceState.onVerify(token),
-        "error-callback": () => inplaceState.onError?.(),
-        "expired-callback": () => {
-          inplaceState.onExpire?.();
-          if (autoResetOnExpire) window.turnstile.reset(widgetId);
-        },
-        "timeout-callback": () => inplaceState.onTimeout?.(),
         "response-field": responseField,
         "response-field-name": responseFieldName,
         retry,
         "retry-interval": retryInterval,
+        "refresh-expired": refreshExpired,
+        callback: (token: string) => inplaceState.onVerify(token),
+        "error-callback": () => inplaceState.onError?.(),
+        "expired-callback": () => inplaceState.onExpire?.(),
+        "timeout-callback": () => inplaceState.onTimeout?.(),
       };
 
       widgetId = window.turnstile.render(ref.current, turnstileOptions);
@@ -123,7 +121,7 @@ export default function Turnstile({
     responseFieldName,
     retry,
     retryInterval,
-    autoResetOnExpire,
+    refreshExpired,
   ]);
   useEffect(() => {
     inplaceState.onVerify = onVerify;
@@ -147,8 +145,7 @@ interface TurnstileProps extends TurnstileCallbacks {
   responseFieldName?: string;
   retry?: "auto" | "never";
   retryInterval?: number;
-  autoResetOnExpire?: boolean;
-
+  refreshExpired?: "auto" | "manual" | "never";
   id?: string;
   userRef?: React.MutableRefObject<HTMLDivElement>;
   className?: string;

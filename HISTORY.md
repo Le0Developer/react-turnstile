@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `refreshExpired` option
+
 ### Changed
 
 - Temporary load callback function is now removed after load
@@ -15,6 +19,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `onTimeout` callback not properly registering
 - `ref` not passing properly - pass `userRef` instead
+
+### Removed
+
+- `autoResetOnExpire` - use `refreshExpired` instead
 
 ## [1.0.6] - 2022-11-25
 
