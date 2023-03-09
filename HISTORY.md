@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `onTimeout` callback not properly registering
 - `ref` not passing properly - pass `userRef` instead
+- `globalThis` errors on older browsers
 
 ### Removed
 

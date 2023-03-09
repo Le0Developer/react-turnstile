@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { TurnstileOptions, SupportedLanguages } from "turnstile-types";
 
-const global = (globalThis ?? window) as any;
+const global = (typeof globalThis !== "undefined" ? globalThis : window) as any;
 let turnstileState =
   typeof global.turnstile !== "undefined" ? "ready" : "unloaded";
 let ensureTurnstile: () => Promise<any>;
