@@ -59,6 +59,8 @@ export default function Turnstile({
   retry,
   retryInterval,
   refreshExpired,
+  appearance,
+  execution,
   userRef,
   onVerify,
   onLoad,
@@ -99,6 +101,8 @@ export default function Turnstile({
         retry,
         "retry-interval": retryInterval,
         "refresh-expired": refreshExpired,
+        appearance,
+        execution,
         callback: (token: string) => inplaceState.onVerify(token),
         "error-callback": () => inplaceState.onError?.(),
         "expired-callback": () => inplaceState.onExpire?.(),
@@ -125,6 +129,8 @@ export default function Turnstile({
     retry,
     retryInterval,
     refreshExpired,
+    appearance,
+    execution,
   ]);
   useEffect(() => {
     inplaceState.onVerify = onVerify;
@@ -150,6 +156,8 @@ interface TurnstileProps extends TurnstileCallbacks {
   retry?: "auto" | "never";
   retryInterval?: number;
   refreshExpired?: "auto" | "manual" | "never";
+  appearance?: "always" | "execute" | "interaction-only";
+  execution?: "render" | "execute";
   id?: string;
   userRef?: React.MutableRefObject<HTMLDivElement>;
   className?: string;
