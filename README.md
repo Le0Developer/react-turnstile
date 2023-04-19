@@ -11,9 +11,11 @@ npm i react-turnstile
 ## Usage
 
 ```jsx
-import Turnstile from "react-turnstile";
+import Turnstile, { useTurnstile } from "react-turnstile";
 
 // ...
+
+const { reset } = useTurnstile(); // Access turnstile reset method
 
 function TurnstileWidget() {
   return (

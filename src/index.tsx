@@ -46,7 +46,6 @@ let ensureTurnstile: () => Promise<any>;
 export function useTurnstile() {
   const reset = () => {
     global.turnstile.reset();
-    console.log('Reset turnstile');
   }
 
   return {
