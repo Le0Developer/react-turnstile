@@ -15,7 +15,15 @@ import Turnstile, { useTurnstile } from "react-turnstile";
 
 // ...
 
-const { reset } = useTurnstile(); // Access turnstile reset method
+// Programmatic access example:
+const turnstile = useTurnstile();
+
+const result = await fetch('/path/to/some/api');
+if (!result.ok) {
+  throw new Error(`Request failed with code ${result.status}`);
+  turnstile.reset();
+}
+
 
 function TurnstileWidget() {
   return (
