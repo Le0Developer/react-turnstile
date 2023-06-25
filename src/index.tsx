@@ -1,9 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
 import { TurnstileOptions, SupportedLanguages } from "turnstile-types";
 
-const global = (typeof globalThis !== "undefined" ? globalThis : window) as any;
+const globalNamespace = (
+  typeof globalThis !== "undefined" ? globalThis : window
+) as any;
 let turnstileState =
-  typeof global.turnstile !== "undefined" ? "ready" : "unloaded";
+  typeof globalNamespace.turnstile !== "undefined" ? "ready" : "unloaded";
 let ensureTurnstile: () => Promise<any>;
 
 // Functions responsible for loading the turnstile api, while also making sure
@@ -24,10 +26,10 @@ let ensureTurnstile: () => Promise<any>;
   ensureTurnstile = () => {
     if (turnstileState === "unloaded") {
       turnstileState = "loading";
-      global[TURNSTILE_LOAD_FUNCTION] = () => {
+      globalNamespace[TURNSTILE_LOAD_FUNCTION] = () => {
         turnstileLoad.resolve();
         turnstileState = "ready";
-        delete global[TURNSTILE_LOAD_FUNCTION];
+        delete globalNamespace[TURNSTILE_LOAD_FUNCTION];
       };
       const url = `${TURNSTILE_SRC}?onload=${TURNSTILE_LOAD_FUNCTION}&render=explicit`;
       const script = document.createElement("script");
@@ -35,7 +37,7 @@ let ensureTurnstile: () => Promise<any>;
       script.async = true;
       script.addEventListener("error", () => {
         turnstileLoad.reject("Failed to load Turnstile.");
-        delete global[TURNSTILE_LOAD_FUNCTION];
+        delete globalNamespace[TURNSTILE_LOAD_FUNCTION];
       });
       document.head.appendChild(script);
     }
