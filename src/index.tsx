@@ -1,5 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
-import { TurnstileOptions, SupportedLanguages } from "turnstile-types";
+import {
+  TurnstileObject,
+  TurnstileOptions,
+  SupportedLanguages,
+} from "turnstile-types";
 
 const globalNamespace = (
   typeof globalThis !== "undefined" ? globalThis : window
@@ -10,18 +14,18 @@ let ensureTurnstile: () => Promise<any>;
 
 // Functions responsible for loading the turnstile api, while also making sure
 // to only load it once
+let turnstileLoad: {
+  resolve: (value?: any) => void;
+  reject: (reason?: any) => void;
+};
+const turnstileLoadPromise = new Promise((resolve, reject) => {
+  turnstileLoad = { resolve, reject };
+  if (turnstileState === "ready") resolve(undefined);
+});
+
 {
   const TURNSTILE_LOAD_FUNCTION = "cf__reactTurnstileOnLoad";
   const TURNSTILE_SRC = "https://challenges.cloudflare.com/turnstile/v0/api.js";
-
-  let turnstileLoad: {
-    resolve: (value?: any) => void;
-    reject: (reason?: any) => void;
-  };
-  const turnstileLoadPromise = new Promise((resolve, reject) => {
-    turnstileLoad = { resolve, reject };
-    if (turnstileState === "ready") resolve(undefined);
-  });
 
   ensureTurnstile = () => {
     if (turnstileState === "unloaded") {
@@ -192,4 +196,17 @@ interface TurnstileCallbacks {
   onError?: (error?: Error | any) => void;
   onExpire?: () => void;
   onTimeout?: () => void;
+}
+
+export function useTurnstile(): TurnstileObject {
+  // we are using state here to trigger a component re-render once turnstile
+  // loads, so the component using this hook gets the object once its loaded
+  const [_, setState] = useState(turnstileState);
+
+  useEffect(() => {
+    if (turnstileState === "ready") return;
+    turnstileLoadPromise.then(() => setState(turnstileState));
+  }, []);
+
+  return globalNamespace.turnstile;
 }
