@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.1] - 2023-06-25
+
 ### Added
 
 - `useTurnstile` hook
@@ -100,7 +102,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial release.
 
-[unreleased]: https://github.com/Le0Developer/react-turnstile/compare/v1.1.0...HEAD
+[unreleased]: https://github.com/Le0Developer/react-turnstile/compare/v1.1.1...HEAD
+[1.1.1]: https://github.com/le0developer/react-turnstile/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/le0developer/react-turnstile/compare/v1.0.6...v1.1.0
 [1.0.6]: https://github.com/le0developer/react-turnstile/compare/v1.0.5...v1.0.6
 [1.0.5]: https://github.com/le0developer/react-turnstile/compare/v1.0.4...v1.0.5
