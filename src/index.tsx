@@ -190,7 +190,7 @@ export default function Turnstile({
   );
 }
 
-interface TurnstileProps extends TurnstileCallbacks {
+export interface TurnstileProps extends TurnstileCallbacks {
   sitekey: string;
   action?: string;
   cData?: string;
@@ -212,7 +212,7 @@ interface TurnstileProps extends TurnstileCallbacks {
   style?: React.CSSProperties;
 }
 
-interface TurnstileCallbacks {
+export interface TurnstileCallbacks {
   onVerify: (token: string, boundTurnstile: BoundTurnstileObject) => void;
   onLoad?: (widgetId: string, boundTurnstile: BoundTurnstileObject) => void;
   onError?: (
@@ -223,7 +223,7 @@ interface TurnstileCallbacks {
   onTimeout?: (boundTurnstile: BoundTurnstileObject) => void;
 }
 
-interface BoundTurnstileObject {
+export interface BoundTurnstileObject {
   execute: (options?: TurnstileOptions) => void;
   reset: () => void;
   getResponse: () => void;
