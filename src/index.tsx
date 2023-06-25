@@ -111,7 +111,7 @@ export default function Turnstile({
         appearance,
         execution,
         callback: (token: string) => inplaceState.onVerify(token),
-        "error-callback": () => {
+        "error-callback": (error?: any) => {
           // we handle retry ourselves because turnstile does not properly
           // reset its timeout when calling turnstile.remove, logging the
           // following in the console:
@@ -128,9 +128,9 @@ export default function Turnstile({
               // even though we have retry=never
             }, 2000 + (retryInterval ?? 8000));
           }
-          inplaceState.onError?.();
+          inplaceState.onError?.(error);
         },
-        "expired-callback": () => inplaceState.onExpire?.(),
+        "expired-callback": (token: string) => inplaceState.onExpire?.(token),
         "timeout-callback": () => inplaceState.onTimeout?.(),
       };
 
@@ -194,7 +194,7 @@ interface TurnstileCallbacks {
   onVerify: (token: string) => void;
   onLoad?: (widgetId: string) => void;
   onError?: (error?: Error | any) => void;
-  onExpire?: () => void;
+  onExpire?: (token: string) => void;
   onTimeout?: () => void;
 }
 
