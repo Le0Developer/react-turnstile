@@ -125,7 +125,7 @@ export default function Turnstile({
             timeoutId = setTimeout(() => {
               window.turnstile.reset(widgetId);
               timeoutId = 0;
-              // no need to do bounds checks, tunrstile already does them for us
+              // no need to do bounds checks, turnstile already does them for us
               // even though we have retry=never
             }, 2000 + (retryInterval ?? 8000));
           }
