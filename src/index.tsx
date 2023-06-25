@@ -96,6 +96,7 @@ export default function Turnstile({
         }
       }
       if (cancelled || !ref.current) return;
+      let boundTurnstileObject: BoundTurnstileObject;
       const turnstileOptions: TurnstileOptions = {
         sitekey,
         action,
@@ -111,7 +112,8 @@ export default function Turnstile({
         "refresh-expired": refreshExpired,
         appearance,
         execution,
-        callback: (token: string) => inplaceState.onVerify(token),
+        callback: (token: string) =>
+          inplaceState.onVerify(token, boundTurnstileObject),
         "error-callback": (error?: any) => {
           // we handle retry ourselves because turnstile does not properly
           // reset its timeout when calling turnstile.remove, logging the
@@ -123,20 +125,23 @@ export default function Turnstile({
           // TODO: remove when fixed
           if (!retry || retry === "auto") {
             timeoutId = setTimeout(() => {
-              window.turnstile.reset(widgetId);
+              boundTurnstileObject.reset();
               timeoutId = 0;
               // no need to do bounds checks, turnstile already does them for us
               // even though we have retry=never
             }, 2000 + (retryInterval ?? 8000));
           }
-          inplaceState.onError?.(error);
+          inplaceState.onError?.(error, boundTurnstileObject);
         },
-        "expired-callback": (token: string) => inplaceState.onExpire?.(token),
-        "timeout-callback": () => inplaceState.onTimeout?.(),
+        "expired-callback": (token: string) =>
+          inplaceState.onExpire?.(token, boundTurnstileObject),
+        "timeout-callback": () =>
+          inplaceState.onTimeout?.(boundTurnstileObject),
       };
 
       widgetId = window.turnstile.render(ref.current, turnstileOptions);
-      inplaceState.onLoad?.(widgetId);
+      boundTurnstileObject = createBoundTurnstileObject(widgetId);
+      inplaceState.onLoad?.(widgetId, boundTurnstileObject);
     })();
     return () => {
       cancelled = true;
@@ -208,11 +213,28 @@ interface TurnstileProps extends TurnstileCallbacks {
 }
 
 interface TurnstileCallbacks {
-  onVerify: (token: string) => void;
-  onLoad?: (widgetId: string) => void;
-  onError?: (error?: Error | any) => void;
-  onExpire?: (token: string) => void;
-  onTimeout?: () => void;
+  onVerify: (token: string, boundTurnstile: BoundTurnstileObject) => void;
+  onLoad?: (widgetId: string, boundTurnstile: BoundTurnstileObject) => void;
+  onError?: (
+    error?: Error | any,
+    boundTurnstile?: BoundTurnstileObject
+  ) => void;
+  onExpire?: (token: string, boundTurnstile: BoundTurnstileObject) => void;
+  onTimeout?: (boundTurnstile: BoundTurnstileObject) => void;
+}
+
+interface BoundTurnstileObject {
+  execute: (options?: TurnstileOptions) => void;
+  reset: () => void;
+  getResponse: () => void;
+}
+
+function createBoundTurnstileObject(widgetId: string): BoundTurnstileObject {
+  return {
+    execute: (options) => window.turnstile.execute(widgetId, options),
+    reset: () => window.turnstile.reset(widgetId),
+    getResponse: () => window.turnstile.getResponse(widgetId),
+  };
 }
 
 export function useTurnstile(): TurnstileObject {

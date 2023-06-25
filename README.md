@@ -46,6 +46,28 @@ This causes Layout Shift and reduces your Cumulative Layout Shift score and UX.
 This can be fixed with the `fixedSize={true}` option, which will force the
 wrapper div to be the specific size of turnstile.
 
+### Bound Turnstile Object
+
+The Bound Turnstile Object is given as argument to all callbacks and allows you
+to call certain `window.turnstile` functions without having to store the `widgetId`
+yourself.
+
+```js
+function Component() {
+  return (
+    <Turnstile
+      executution="execute"
+      onLoad={(widgetId, bound) => {
+        // before:
+        window.turnstile.execute(widgetId);
+        // now:
+        bound.execute();
+      }}
+    />
+  );
+}
+```
+
 ## Documentation
 
 Turnstile takes the following arguments:
@@ -80,5 +102,9 @@ And the following callbacks:
 | onError   | error     | called when an error occurs                |
 | onExpire  | -         | called when the token expires              |
 | onTimeout | token     | called when the challenge expires          |
+
+The callbacks also take an additional `BoundTurnstileObject` which exposes
+certain functions of `window.turnstile` which are already bound to the
+current widget, so you don't need track the `widgetId` yourself.
 
 For more details on what each argument does, see the [Cloudflare Documentation](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/#configurations).
