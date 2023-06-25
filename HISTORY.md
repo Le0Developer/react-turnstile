@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `useTurnstile` hook
+- `fixedSize` option to reduce layout shift
+- Missing argument for `onExpire
+
+### Fixed
+
+- `global` -> `globalNamespace` (name conflict) (#10)
+- Implement `retry` logic ourselves (#14)
+- Missing `onError` error argument passthrough
+
 ## [1.1.0] - 2023-03-09
 
 ### Added
