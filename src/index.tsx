@@ -120,7 +120,7 @@ export default function Turnstile({
           // - https://github.com/Le0Developer/react-turnstile/issues/14
           // - https://discord.com/channels/595317990191398933/1025131875397812224/1122137855368646717
           // TODO: remove when fixed
-          if (retry === "auto") {
+          if (!retry || retry === "auto") {
             timeoutId = setTimeout(() => {
               window.turnstile.reset(widgetId);
               timeoutId = 0;
