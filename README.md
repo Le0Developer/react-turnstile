@@ -50,22 +50,26 @@ wrapper div to be the specific size of turnstile.
 
 Turnstile takes the following arguments:
 
-| name              | type    | description                                           |
-| ----------------- | ------- | ----------------------------------------------------- |
-| sitekey           | string  | sitekey of your website (REQUIRED)                    |
-| action            | string  | -                                                     |
-| cData             | string  | -                                                     |
-| theme             | string  | one of "light", "dark", "auto"                        |
-| tabIndex          | number  | -                                                     |
-| responseField     | boolean | controls generation of `<input />` element            |
-| responseFieldName | string  | changes the name of `<input />` element               |
-| retry             | string  | one of "auto", "never"                                |
-| retryInterval     | number  | interval of retries in ms                             |
-| autoResetOnExpire | boolean | automatically reset the widget when the token expires |
-| id                | string  | id of the div                                         |
-| ref               | Ref     | custom react ref for the div                          |
-| className         | string  | passed to the div                                     |
-| style             | object  | passed to the div                                     |
+| name              | type    | description                                          |
+| ----------------- | ------- | ---------------------------------------------------- |
+| sitekey           | string  | sitekey of your website (REQUIRED)                   |
+| action            | string  | -                                                    |
+| cData             | string  | -                                                    |
+| theme             | string  | one of "light", "dark", "auto"                       |
+| language          | string  | override the language used by turnstile              |
+| tabIndex          | number  | -                                                    |
+| responseField     | boolean | controls generation of `<input />` element           |
+| responseFieldName | string  | changes the name of `<input />` element              |
+| size              | string  | one of "normal", "compact"                           |
+| fixedSize         | boolean | fix the size of the `<div />` to reduce layout shift |
+| retry             | string  | one of "auto", "never"                               |
+| retryInterval     | number  | interval of retries in ms                            |
+| appearance        | string  | one of "always", "execute", "interaction-only"       |
+| execution         | string  | one of "render", "execute"                           |
+| id                | string  | id of the div                                        |
+| ref               | Ref     | custom react ref for the div                         |
+| className         | string  | passed to the div                                    |
+| style             | object  | passed to the div                                    |
 
 And the following callbacks:
 
