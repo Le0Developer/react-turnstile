@@ -79,6 +79,6 @@ And the following callbacks:
 | onLoad    | widgetId  | called when the widget is loaded           |
 | onError   | error     | called when an error occurs                |
 | onExpire  | -         | called when the token expires              |
-| onTimeout | -         | called when the challenge expires          |
+| onTimeout | token     | called when the challenge expires          |
 
 For more details on what each argument does, see the [Cloudflare Documentation](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/#configurations).
