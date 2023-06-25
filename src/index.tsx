@@ -174,12 +174,12 @@ export default function Turnstile({
       className={className}
       style={
         fixedSize
-          ? style
-          : {
+          ? {
               ...style,
               width: size === "compact" ? "130px" : "300px",
               height: size === "compact" ? "120px" : "65px",
             }
+          : style
       }
     />
   );
