@@ -78,7 +78,8 @@ export default function Turnstile({
   useEffect(() => {
     if (!ref.current) return;
     let cancelled = false;
-    let widgetId = "";
+    let widgetId = "",
+      timeoutId = 0;
     (async () => {
       // load turnstile
       if (turnstileState !== "ready") {
@@ -100,13 +101,31 @@ export default function Turnstile({
         "response-field": responseField,
         "response-field-name": responseFieldName,
         size,
-        retry,
+        retry: "never", // see error-callback for why
         "retry-interval": retryInterval,
         "refresh-expired": refreshExpired,
         appearance,
         execution,
         callback: (token: string) => inplaceState.onVerify(token),
-        "error-callback": () => inplaceState.onError?.(),
+        "error-callback": () => {
+          // we handle retry ourselves because turnstile does not properly
+          // reset its timeout when calling turnstile.remove, logging the
+          // following in the console:
+          // > [Cloudflare Turnstile] Nothing to reset found for provided container.
+          // refs:
+          // - https://github.com/Le0Developer/react-turnstile/issues/14
+          // - https://discord.com/channels/595317990191398933/1025131875397812224/1122137855368646717
+          // TODO: remove when fixed
+          if (retry === "auto") {
+            timeoutId = setTimeout(() => {
+              window.turnstile.reset(widgetId);
+              timeoutId = 0;
+              // no need to do bounds checks, tunrstile already does them for us
+              // even though we have retry=never
+            }, 2000 + (retryInterval ?? 8000));
+          }
+          inplaceState.onError?.();
+        },
         "expired-callback": () => inplaceState.onExpire?.(),
         "timeout-callback": () => inplaceState.onTimeout?.(),
       };
@@ -117,6 +136,7 @@ export default function Turnstile({
     return () => {
       cancelled = true;
       if (widgetId) window.turnstile.remove(widgetId);
+      if (timeoutId) clearTimeout(timeoutId);
     };
   }, [
     sitekey,
