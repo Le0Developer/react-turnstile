@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `useTurnstile` hook
 - `fixedSize` option to reduce layout shift
-- Missing argument for `onExpire
+- Missing argument for `onExpire`
 
 ### Fixed
 
