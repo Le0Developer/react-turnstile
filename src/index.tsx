@@ -62,6 +62,7 @@ export default function Turnstile({
   responseField,
   responseFieldName,
   size,
+  fixedSize,
   retry,
   retryInterval,
   refreshExpired,
@@ -166,7 +167,22 @@ export default function Turnstile({
     inplaceState.onTimeout = onTimeout;
   }, [onVerify, onLoad, onError, onExpire, onTimeout]);
 
-  return <div ref={ref} id={id} className={className} style={style} />;
+  return (
+    <div
+      ref={ref}
+      id={id}
+      className={className}
+      style={
+        fixedSize
+          ? style
+          : {
+              ...style,
+              width: size === "compact" ? "130px" : "300px",
+              height: size === "compact" ? "120px" : "65px",
+            }
+      }
+    />
+  );
 }
 
 interface TurnstileProps extends TurnstileCallbacks {
@@ -179,6 +195,7 @@ interface TurnstileProps extends TurnstileCallbacks {
   responseField?: boolean;
   responseFieldName?: string;
   size?: "normal" | "invisible" | "compact";
+  fixedSize?: boolean;
   retry?: "auto" | "never";
   retryInterval?: number;
   refreshExpired?: "auto" | "manual" | "never";

@@ -36,6 +36,16 @@ function TurnstileWidget() {
 Turnstile tokens expire after 5 minutes, to automatically reset the challenge once they expire,
 set the `autoResetOnExpire` prop to true or reset the widget yourself using the `onExpire` callback.
 
+### Reducing Layout Shift
+
+The turnstile iframe initially loads as invisible before becoming visible and
+expanding to the expected widget size.
+
+This causes Layout Shift and reduces your Cumulative Layout Shift score and UX.
+
+This can be fixed with the `fixedSize={true}` option, which will force the
+wrapper div to be the specific size of turnstile.
+
 ## Documentation
 
 Turnstile takes the following arguments:
