@@ -76,7 +76,7 @@ export default function Turnstile({
   onTimeout,
 }: TurnstileProps) {
   const ownRef = useRef<HTMLDivElement | null>(null);
-  const inplaceState = useState<TurnstileCallbacks>({ onVerify })[0];
+  const inplaceState = useState<TurnstileCallbacks>({ onVerify, onLoad, onError, onExpire, onTimeout })[0];
 
   const ref = userRef ?? ownRef;
 
