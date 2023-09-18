@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Remount issue with certain callbacks (#15)
+
 ## [1.1.1] - 2023-06-25
 
 ### Added
