@@ -241,6 +241,7 @@ export interface BoundTurnstileObject {
   execute: (options?: TurnstileOptions) => void;
   reset: () => void;
   getResponse: () => void;
+	isExpired: () => boolean;
 }
 
 function createBoundTurnstileObject(widgetId: string): BoundTurnstileObject {
@@ -248,6 +249,7 @@ function createBoundTurnstileObject(widgetId: string): BoundTurnstileObject {
     execute: (options) => window.turnstile.execute(widgetId, options),
     reset: () => window.turnstile.reset(widgetId),
     getResponse: () => window.turnstile.getResponse(widgetId),
+    isExpired: () => window.turnstile.isExpired(widgetId),
   };
 }
 
