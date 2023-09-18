@@ -27,7 +27,7 @@
   "devDependencies": {
     "@types/react": "^18.0.21",
     "prettier": "^2.7.1",
-    "turnstile-types": "^1.1.2",
+    "turnstile-types": "^1.1.3",
     "typescript": "^4.8.4"
   }
 }

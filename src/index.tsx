@@ -74,9 +74,21 @@ export default function Turnstile({
   onError,
   onExpire,
   onTimeout,
+  onAfterInteractive,
+  onBeforeInteractive,
+  onUnsupported,
 }: TurnstileProps) {
   const ownRef = useRef<HTMLDivElement | null>(null);
-  const inplaceState = useState<TurnstileCallbacks>({ onVerify, onLoad, onError, onExpire, onTimeout })[0];
+  const inplaceState = useState<TurnstileCallbacks>({
+    onVerify,
+    onLoad,
+    onError,
+    onExpire,
+    onTimeout,
+    onAfterInteractive,
+    onBeforeInteractive,
+    onUnsupported,
+  })[0];
 
   const ref = userRef ?? ownRef;
 
@@ -119,6 +131,12 @@ export default function Turnstile({
           inplaceState.onExpire?.(token, boundTurnstileObject),
         "timeout-callback": () =>
           inplaceState.onTimeout?.(boundTurnstileObject),
+        "after-interactive-callback": () =>
+          inplaceState.onAfterInteractive?.(boundTurnstileObject),
+        "before-interactive-callback": () =>
+          inplaceState.onBeforeInteractive?.(boundTurnstileObject),
+        "unsupported-callback": () =>
+          inplaceState.onUnsupported?.(boundTurnstileObject),
       };
 
       widgetId = window.turnstile.render(ref.current, turnstileOptions);
@@ -151,7 +169,19 @@ export default function Turnstile({
     inplaceState.onError = onError;
     inplaceState.onExpire = onExpire;
     inplaceState.onTimeout = onTimeout;
-  }, [onVerify, onLoad, onError, onExpire, onTimeout]);
+    inplaceState.onAfterInteractive = onAfterInteractive;
+    inplaceState.onBeforeInteractive = onBeforeInteractive;
+    inplaceState.onUnsupported = onUnsupported;
+  }, [
+    onVerify,
+    onLoad,
+    onError,
+    onExpire,
+    onTimeout,
+    onAfterInteractive,
+    onBeforeInteractive,
+    onUnsupported,
+  ]);
 
   return (
     <div
@@ -202,6 +232,9 @@ export interface TurnstileCallbacks {
   ) => void;
   onExpire?: (token: string, boundTurnstile: BoundTurnstileObject) => void;
   onTimeout?: (boundTurnstile: BoundTurnstileObject) => void;
+  onAfterInteractive?: (boundTurnstile: BoundTurnstileObject) => void;
+  onBeforeInteractive?: (boundTurnstile: BoundTurnstileObject) => void;
+  onUnsupported?: (boundTurnstile: BoundTurnstileObject) => void;
 }
 
 export interface BoundTurnstileObject {
