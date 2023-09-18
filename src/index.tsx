@@ -118,7 +118,7 @@ export default function Turnstile({
         "response-field": responseField,
         "response-field-name": responseFieldName,
         size,
-        retry: "never", // see error-callback for why
+        retry,
         "retry-interval": retryInterval,
         "refresh-expired": refreshExpired,
         appearance,
