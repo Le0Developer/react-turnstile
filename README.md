@@ -97,7 +97,7 @@ And the following callbacks:
 
 | name                | arguments | description                                         |
 | ------------------- | --------- | --------------------------------------------------- |
-| onVerify            | token     | called when challenge is passed (REQUIRED)          |
+| onVerify            | token     | called when challenge is passed                     |
 | onLoad              | widgetId  | called when the widget is loaded                    |
 | onError             | error     | called when an error occurs                         |
 | onExpire            | -         | called when the token expires                       |

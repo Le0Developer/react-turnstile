@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `onAfterInteractive`, `onBeforeInteractive`, `onUnsupported` callbacks
 
+### Changed
+
+- `onVerify` is no longer required
+
 ### Removed
 
 - Custom `retry` logic (issue fixed upstream in Turnstile itself)

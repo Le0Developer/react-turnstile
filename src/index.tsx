@@ -124,7 +124,7 @@ export default function Turnstile({
         appearance,
         execution,
         callback: (token: string) =>
-          inplaceState.onVerify(token, boundTurnstileObject),
+          inplaceState.onVerify?.(token, boundTurnstileObject),
         "error-callback": (error?: any) =>
           inplaceState.onError?.(error, boundTurnstileObject),
         "expired-callback": (token: string) =>
@@ -224,7 +224,7 @@ export interface TurnstileProps extends TurnstileCallbacks {
 }
 
 export interface TurnstileCallbacks {
-  onVerify: (token: string, boundTurnstile: BoundTurnstileObject) => void;
+  onVerify?: (token: string, boundTurnstile: BoundTurnstileObject) => void;
   onLoad?: (widgetId: string, boundTurnstile: BoundTurnstileObject) => void;
   onError?: (
     error?: Error | any,
