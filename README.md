@@ -89,7 +89,7 @@ Turnstile takes the following arguments:
 | appearance        | string  | one of "always", "execute", "interaction-only"       |
 | execution         | string  | one of "render", "execute"                           |
 | id                | string  | id of the div                                        |
-| ref               | Ref     | custom react ref for the div                         |
+| userRef           | Ref     | custom react ref for the div                         |
 | className         | string  | passed to the div                                    |
 | style             | object  | passed to the div                                    |
 
