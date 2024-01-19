@@ -53,7 +53,7 @@ export default function Turnstile({
   id,
   className,
   style,
-  sitekey,
+  siteKey,
   action,
   cData,
   theme,
@@ -109,7 +109,7 @@ export default function Turnstile({
       if (cancelled || !ref.current) return;
       let boundTurnstileObject: BoundTurnstileObject;
       const turnstileOptions: TurnstileOptions = {
-        sitekey,
+        siteKey,
         action,
         cData,
         theme,
@@ -148,7 +148,7 @@ export default function Turnstile({
       if (widgetId) window.turnstile.remove(widgetId);
     };
   }, [
-    sitekey,
+    siteKey,
     action,
     cData,
     theme,
@@ -202,7 +202,7 @@ export default function Turnstile({
 }
 
 export interface TurnstileProps extends TurnstileCallbacks {
-  sitekey: string;
+  siteKey: string;
   action?: string;
   cData?: string;
   theme?: "light" | "dark" | "auto";
