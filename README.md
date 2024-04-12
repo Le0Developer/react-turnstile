@@ -34,7 +34,7 @@ function TurnstileWidget() {
 ```
 
 Turnstile tokens expire after 5 minutes, to automatically reset the challenge once they expire,
-set the `autoResetOnExpire` prop to true or reset the widget yourself using the `onExpire` callback.
+set the `refreshExpired` prop to `'auto'` or reset the widget yourself using the `onExpire` callback.
 
 ### Reducing Layout Shift
 
@@ -86,6 +86,7 @@ Turnstile takes the following arguments:
 | fixedSize         | boolean | fix the size of the `<div />` to reduce layout shift |
 | retry             | string  | one of "auto", "never"                               |
 | retryInterval     | number  | interval of retries in ms                            |
+| refreshExpired    | string  | one of "auto" | "manual" | "never"                   |
 | appearance        | string  | one of "always", "execute", "interaction-only"       |
 | execution         | string  | one of "render", "execute"                           |
 | id                | string  | id of the div                                        |
