@@ -94,7 +94,7 @@ Turnstile takes the following arguments:
 | className         | string  | passed to the div                                    |
 | style             | object  | passed to the div                                    |
 
-And the following callbacks: refreshExpired?: "auto" | "manual" | "never";
+And the following callbacks:
 
 | name                | arguments | description                                         |
 | ------------------- | --------- | --------------------------------------------------- |
