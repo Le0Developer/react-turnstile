@@ -56,7 +56,7 @@ yourself.
 function Component() {
   return (
     <Turnstile
-      executution="execute"
+      execution="execute"
       onLoad={(widgetId, bound) => {
         // before:
         window.turnstile.execute(widgetId);
