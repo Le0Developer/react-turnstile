@@ -70,6 +70,7 @@ export default function Turnstile({
   execution,
   userRef,
   onVerify,
+  onSuccess,
   onLoad,
   onError,
   onExpire,
@@ -81,6 +82,7 @@ export default function Turnstile({
   const ownRef = useRef<HTMLDivElement | null>(null);
   const inplaceState = useState<TurnstileCallbacks>({
     onVerify,
+    onSuccess,
     onLoad,
     onError,
     onExpire,
@@ -123,8 +125,10 @@ export default function Turnstile({
         "refresh-expired": refreshExpired,
         appearance,
         execution,
-        callback: (token: string) =>
-          inplaceState.onVerify?.(token, boundTurnstileObject),
+        callback: (token: string, preClearanceObtained: boolean) => {
+          inplaceState.onVerify?.(token, boundTurnstileObject);
+          inplaceState.onSuccess?.(token, preClearanceObtained, boundTurnstileObject);
+        },
         "error-callback": (error?: any) =>
           inplaceState.onError?.(error, boundTurnstileObject),
         "expired-callback": (token: string) =>
@@ -165,6 +169,7 @@ export default function Turnstile({
   ]);
   useEffect(() => {
     inplaceState.onVerify = onVerify;
+    inplaceState.onSuccess = onSuccess;
     inplaceState.onLoad = onLoad;
     inplaceState.onError = onError;
     inplaceState.onExpire = onExpire;
@@ -174,6 +179,7 @@ export default function Turnstile({
     inplaceState.onUnsupported = onUnsupported;
   }, [
     onVerify,
+    onSuccess,
     onLoad,
     onError,
     onExpire,
@@ -225,6 +231,7 @@ export interface TurnstileProps extends TurnstileCallbacks {
 
 export interface TurnstileCallbacks {
   onVerify?: (token: string, boundTurnstile: BoundTurnstileObject) => void;
+  onSuccess?: (token: string, preClearanceObtained: boolean, boundTurnstile: BoundTurnstileObject) => void;
   onLoad?: (widgetId: string, boundTurnstile: BoundTurnstileObject) => void;
   onError?: (
     error?: Error | any,

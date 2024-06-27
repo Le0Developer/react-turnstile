@@ -96,16 +96,17 @@ Turnstile takes the following arguments:
 
 And the following callbacks:
 
-| name                | arguments | description                                         |
-| ------------------- | --------- | --------------------------------------------------- |
-| onVerify            | token     | called when challenge is passed                     |
-| onLoad              | widgetId  | called when the widget is loaded                    |
-| onError             | error     | called when an error occurs                         |
-| onExpire            | -         | called when the token expires                       |
-| onTimeout           | token     | called when the challenge expires                   |
-| onAfterInteractive  | -         | called when the challenge becomes interactive       |
-| onBeforeInteractive | -         | called when the challenge no longer is interactive  |
-| onUnsupported       | -         | called when the browser is unsupported by Turnstile |
+| name                | arguments                     | description                                         |
+| ------------------- | ----------------------------- | --------------------------------------------------- |
+| onVerify            | token                         | called when challenge is passed                     |
+| onSuccess           | token, preClearanceObtained   | called when challenge is passed                     |
+| onLoad              | widgetId                      | called when the widget is loaded                    |
+| onError             | error                         | called when an error occurs                         |
+| onExpire            | -                             | called when the token expires                       |
+| onTimeout           | token                         | called when the challenge expires                   |
+| onAfterInteractive  | -                             | called when the challenge becomes interactive       |
+| onBeforeInteractive | -                             | called when the challenge no longer is interactive  |
+| onUnsupported       | -                             | called when the browser is unsupported by Turnstile |
 
 The callbacks also take an additional `BoundTurnstileObject` which exposes
 certain functions of `window.turnstile` which are already bound to the
