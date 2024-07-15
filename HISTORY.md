@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `onSuccess` callback with the additional `preClearanceObtained` argument
+
 ## [1.1.3] - 2024-02-19
 
 ### Changed
