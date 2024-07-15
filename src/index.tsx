@@ -130,7 +130,7 @@ export default function Turnstile({
           inplaceState.onSuccess?.(
             token,
             preClearanceObtained,
-            boundTurnstileObject
+            boundTurnstileObject,
           );
         },
         "error-callback": (error?: any) =>
@@ -238,12 +238,12 @@ export interface TurnstileCallbacks {
   onSuccess?: (
     token: string,
     preClearanceObtained: boolean,
-    boundTurnstile: BoundTurnstileObject
+    boundTurnstile: BoundTurnstileObject,
   ) => void;
   onLoad?: (widgetId: string, boundTurnstile: BoundTurnstileObject) => void;
   onError?: (
     error?: Error | any,
-    boundTurnstile?: BoundTurnstileObject
+    boundTurnstile?: BoundTurnstileObject,
   ) => void;
   onExpire?: (token: string, boundTurnstile: BoundTurnstileObject) => void;
   onTimeout?: (boundTurnstile: BoundTurnstileObject) => void;
