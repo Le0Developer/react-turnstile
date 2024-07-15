@@ -127,7 +127,11 @@ export default function Turnstile({
         execution,
         callback: (token: string, preClearanceObtained: boolean) => {
           inplaceState.onVerify?.(token, boundTurnstileObject);
-          inplaceState.onSuccess?.(token, preClearanceObtained, boundTurnstileObject);
+          inplaceState.onSuccess?.(
+            token,
+            preClearanceObtained,
+            boundTurnstileObject
+          );
         },
         "error-callback": (error?: any) =>
           inplaceState.onError?.(error, boundTurnstileObject),
@@ -231,7 +235,11 @@ export interface TurnstileProps extends TurnstileCallbacks {
 
 export interface TurnstileCallbacks {
   onVerify?: (token: string, boundTurnstile: BoundTurnstileObject) => void;
-  onSuccess?: (token: string, preClearanceObtained: boolean, boundTurnstile: BoundTurnstileObject) => void;
+  onSuccess?: (
+    token: string,
+    preClearanceObtained: boolean,
+    boundTurnstile: BoundTurnstileObject
+  ) => void;
   onLoad?: (widgetId: string, boundTurnstile: BoundTurnstileObject) => void;
   onError?: (
     error?: Error | any,
