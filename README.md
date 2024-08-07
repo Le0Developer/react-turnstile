@@ -48,6 +48,7 @@ Turnstile takes the following arguments:
 | action            | string  | -                                                     |
 | cData             | string  | -                                                     |
 | theme             | string  | one of "light", "dark", "auto"                        |
+| size              | string  | one of "normal", "compact". default: "normal"         |
 | tabIndex          | number  | -                                                     |
 | responseField     | boolean | controls generation of `<input />` element            |
 | responseFieldName | string  | changes the name of `<input />` element               |
@@ -66,7 +67,7 @@ And the following callbacks:
 | onVerify  | token     | called when challenge is passed (REQUIRED) |
 | onLoad    | widgetId  | called when the widget is loaded           |
 | onError   | error     | called when an error occurs                |
-| onExpire  | -         | called when the token expires              |
+| onExpire  | token     | called when the token expires              |
 | onTimeout | -         | called when the challenge expires          |
 
 For more details on what each argument does, see the [Cloudflare Documentation](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/#configurations).
