@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { TurnstileOptions, SupportedLanguages } from "turnstile-types";
+import { RenderParameters, SupportedLanguages } from "turnstile-types";
 
 const global = (typeof globalThis !== "undefined" ? globalThis : window) as any;
 let turnstileState =
@@ -92,7 +92,7 @@ export default function Turnstile({
         }
       }
       if (cancelled || !ref.current) return;
-      const turnstileOptions: TurnstileOptions = {
+      const turnstileOptions: RenderParameters = {
         sitekey,
         action,
         cData,
@@ -156,7 +156,7 @@ interface TurnstileProps extends TurnstileCallbacks {
   tabIndex?: number;
   responseField?: boolean;
   responseFieldName?: string;
-  size?: "normal" | "invisible" | "compact";
+  size?: "normal" | "compact";
   retry?: "auto" | "never";
   retryInterval?: number;
   refreshExpired?: "auto" | "manual" | "never";
