@@ -220,7 +220,7 @@ export interface TurnstileProps extends TurnstileCallbacks {
   tabIndex?: number;
   responseField?: boolean;
   responseFieldName?: string;
-  size?: "normal" | "invisible" | "compact";
+  size?: "normal" | "flexible" | "compact";
   fixedSize?: boolean;
   retry?: "auto" | "never";
   retryInterval?: number;
