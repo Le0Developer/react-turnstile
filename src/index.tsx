@@ -144,7 +144,8 @@ export default function Turnstile({
         },
         "error-callback": (error?: any) =>
           inplaceState.onError?.(error, boundTurnstileObject),
-        "expired-callback": () => inplaceState.onExpire?.(boundTurnstileObject),
+        "expired-callback": (token: string) =>
+          inplaceState.onExpire?.(token, boundTurnstileObject),
         "timeout-callback": () =>
           inplaceState.onTimeout?.(boundTurnstileObject),
         "after-interactive-callback": () =>
@@ -201,14 +202,7 @@ export default function Turnstile({
     onUnsupported,
   ]);
 
-  return (
-    <div
-      ref={ref}
-      id={id}
-      className={className}
-      style={style}
-    />
-  );
+  return <div ref={ref} id={id} className={className} style={style} />;
 }
 
 export interface TurnstileProps extends TurnstileCallbacks {
@@ -245,7 +239,7 @@ export interface TurnstileCallbacks {
     error?: Error | any,
     boundTurnstile?: BoundTurnstileObject
   ) => void;
-  onExpire?: (boundTurnstile: BoundTurnstileObject) => void;
+  onExpire?: (token: string, boundTurnstile: BoundTurnstileObject) => void;
   onTimeout?: (boundTurnstile: BoundTurnstileObject) => void;
   onAfterInteractive?: (boundTurnstile: BoundTurnstileObject) => void;
   onBeforeInteractive?: (boundTurnstile: BoundTurnstileObject) => void;
