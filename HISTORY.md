@@ -10,6 +10,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `onSuccess` callback with the additional `preClearanceObtained` argument
+- `flexible` option for `size` prop
+
+### Changed
+
+- Update `turnstile-types` to v1.2.3
 
 ## [1.1.3] - 2024-02-19
 
