@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import {
   TurnstileObject,
-  TurnstileOptions,
   SupportedLanguages,
+  RenderParameters,
 } from "turnstile-types";
 
 const globalNamespace = (
@@ -52,7 +52,7 @@ const turnstileLoadPromise = new Promise((resolve, reject) => {
 export default function Turnstile({
   id,
   className,
-  style,
+  style: customStyle,
   sitekey,
   action,
   cData,
@@ -94,6 +94,15 @@ export default function Turnstile({
 
   const ref = userRef ?? ownRef;
 
+  const style = fixedSize
+    ? {
+        width:
+          size === "compact" ? "130px" : size === "flexible" ? "100%" : "300px",
+        height: size === "compact" ? "120px" : "65px",
+        ...customStyle,
+      }
+    : customStyle;
+
   useEffect(() => {
     if (!ref.current) return;
     let cancelled = false;
@@ -110,7 +119,7 @@ export default function Turnstile({
       }
       if (cancelled || !ref.current) return;
       let boundTurnstileObject: BoundTurnstileObject;
-      const turnstileOptions: TurnstileOptions = {
+      const turnstileOptions: RenderParameters = {
         sitekey,
         action,
         cData,
@@ -130,7 +139,7 @@ export default function Turnstile({
           inplaceState.onSuccess?.(
             token,
             preClearanceObtained,
-            boundTurnstileObject,
+            boundTurnstileObject
           );
         },
         "error-callback": (error?: any) =>
@@ -193,22 +202,7 @@ export default function Turnstile({
     onUnsupported,
   ]);
 
-  return (
-    <div
-      ref={ref}
-      id={id}
-      className={className}
-      style={
-        fixedSize
-          ? {
-              ...(style ?? {}),
-              width: size === "compact" ? "130px" : "300px",
-              height: size === "compact" ? "120px" : "65px",
-            }
-          : style
-      }
-    />
-  );
+  return <div ref={ref} id={id} className={className} style={style} />;
 }
 
 export interface TurnstileProps extends TurnstileCallbacks {
@@ -220,7 +214,7 @@ export interface TurnstileProps extends TurnstileCallbacks {
   tabIndex?: number;
   responseField?: boolean;
   responseFieldName?: string;
-  size?: "normal" | "invisible" | "compact";
+  size?: "normal" | "compact" | "flexible" | "invisible";
   fixedSize?: boolean;
   retry?: "auto" | "never";
   retryInterval?: number;
@@ -238,12 +232,12 @@ export interface TurnstileCallbacks {
   onSuccess?: (
     token: string,
     preClearanceObtained: boolean,
-    boundTurnstile: BoundTurnstileObject,
+    boundTurnstile: BoundTurnstileObject
   ) => void;
   onLoad?: (widgetId: string, boundTurnstile: BoundTurnstileObject) => void;
   onError?: (
     error?: Error | any,
-    boundTurnstile?: BoundTurnstileObject,
+    boundTurnstile?: BoundTurnstileObject
   ) => void;
   onExpire?: (token: string, boundTurnstile: BoundTurnstileObject) => void;
   onTimeout?: (boundTurnstile: BoundTurnstileObject) => void;
@@ -253,7 +247,7 @@ export interface TurnstileCallbacks {
 }
 
 export interface BoundTurnstileObject {
-  execute: (options?: TurnstileOptions) => void;
+  execute: (options?: RenderParameters) => void;
   reset: () => void;
   getResponse: () => void;
   isExpired: () => boolean;
