@@ -52,7 +52,7 @@ const turnstileLoadPromise = new Promise((resolve, reject) => {
 export default function Turnstile({
   id,
   className,
-  style,
+  style: customStyle,
   sitekey,
   action,
   cData,
@@ -93,6 +93,12 @@ export default function Turnstile({
   })[0];
 
   const ref = userRef ?? ownRef;
+
+  const style = {
+    width: size === "compact" ? "130px" : size === "flexible" ? "100%" : "300px",
+    height: size === "compact" ? "120px" : "65px",
+    ...(customStyle ?? {}),
+  }
 
   useEffect(() => {
     if (!ref.current) return;
@@ -220,7 +226,7 @@ export interface TurnstileProps extends TurnstileCallbacks {
   tabIndex?: number;
   responseField?: boolean;
   responseFieldName?: string;
-  size?: "normal" | "invisible" | "compact";
+  size?: "normal" | "invisible" | "compact" | "flexible";
   fixedSize?: boolean;
   retry?: "auto" | "never";
   retryInterval?: number;
