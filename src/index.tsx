@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import {
   TurnstileObject,
-  TurnstileOptions,
   SupportedLanguages,
+  RenderParameters,
 } from "turnstile-types";
 
 const globalNamespace = (
@@ -116,7 +116,7 @@ export default function Turnstile({
       }
       if (cancelled || !ref.current) return;
       let boundTurnstileObject: BoundTurnstileObject;
-      const turnstileOptions: TurnstileOptions = {
+      const turnstileOptions: RenderParameters = {
         sitekey,
         action,
         cData,
@@ -141,8 +141,8 @@ export default function Turnstile({
         },
         "error-callback": (error?: any) =>
           inplaceState.onError?.(error, boundTurnstileObject),
-        "expired-callback": (token: string) =>
-          inplaceState.onExpire?.(token, boundTurnstileObject),
+        "expired-callback": () =>
+          inplaceState.onExpire?.(boundTurnstileObject),
         "timeout-callback": () =>
           inplaceState.onTimeout?.(boundTurnstileObject),
         "after-interactive-callback": () =>
@@ -226,7 +226,7 @@ export interface TurnstileProps extends TurnstileCallbacks {
   tabIndex?: number;
   responseField?: boolean;
   responseFieldName?: string;
-  size?: "normal" | "invisible" | "compact" | "flexible";
+  size?: "normal" | "compact" | "flexible";
   fixedSize?: boolean;
   retry?: "auto" | "never";
   retryInterval?: number;
@@ -251,7 +251,7 @@ export interface TurnstileCallbacks {
     error?: Error | any,
     boundTurnstile?: BoundTurnstileObject,
   ) => void;
-  onExpire?: (token: string, boundTurnstile: BoundTurnstileObject) => void;
+  onExpire?: (boundTurnstile: BoundTurnstileObject) => void;
   onTimeout?: (boundTurnstile: BoundTurnstileObject) => void;
   onAfterInteractive?: (boundTurnstile: BoundTurnstileObject) => void;
   onBeforeInteractive?: (boundTurnstile: BoundTurnstileObject) => void;
@@ -259,7 +259,7 @@ export interface TurnstileCallbacks {
 }
 
 export interface BoundTurnstileObject {
-  execute: (options?: TurnstileOptions) => void;
+  execute: (options?: RenderParameters) => void;
   reset: () => void;
   getResponse: () => void;
   isExpired: () => boolean;
