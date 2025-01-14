@@ -82,7 +82,7 @@ Turnstile takes the following arguments:
 | tabIndex          | number  | -                                                    |
 | responseField     | boolean | controls generation of `<input />` element           |
 | responseFieldName | string  | changes the name of `<input />` element              |
-| size              | string  | one of "normal", "compact", "flexible", invisible    |
+| size              | string  | one of "normal", "compact", "flexible"               |
 | fixedSize         | boolean | fix the size of the `<div />` to reduce layout shift |
 | retry             | string  | one of "auto", "never"                               |
 | retryInterval     | number  | interval of retries in ms                            |
