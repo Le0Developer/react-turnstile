@@ -49,7 +49,7 @@ const turnstileLoadPromise = new Promise((resolve, reject) => {
   };
 }
 
-export default function Turnstile({
+export function Turnstile({
   id,
   className,
   style: customStyle,
@@ -204,6 +204,8 @@ export default function Turnstile({
 
   return <div ref={ref} id={id} className={className} style={style} />;
 }
+
+export default Turnstile;
 
 export interface TurnstileProps extends TurnstileCallbacks {
   sitekey: string;
