@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.5] - 2026-01-30
+
+### Added / Fixed
+
+- Added named export for Turnstile component (#45)
+
 ## [1.1.4] - 2024-09-24
 
 ### Added
@@ -137,7 +143,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial release.
 
-[unreleased]: https://github.com/Le0Developer/react-turnstile/compare/v1.1.4...HEAD
+[unreleased]: https://github.com/Le0Developer/react-turnstile/compare/v1.1.5...HEAD
+[1.1.5]: https://github.com/le0developer/react-turnstile/compare/v1.1.4...v1.1.5
 [1.1.4]: https://github.com/le0developer/react-turnstile/compare/v1.1.3...v1.1.4
 [1.1.3]: https://github.com/le0developer/react-turnstile/compare/v1.1.2...v1.1.3
 [1.1.2]: https://github.com/le0developer/react-turnstile/compare/v1.1.1...v1.1.2
