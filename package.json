@@ -8,6 +8,13 @@
     "build": "tsc",
     "style-fix": "npx prettier -w ."
   },
+  "files": [
+    "dist/**/*",
+    "HISTORY.md",
+    "LICENSE",
+    "package.json",
+    "README.md"
+  ],
   "exports": {
     "import": "./dist/index.js",
     "require": "./dist/index.js",
